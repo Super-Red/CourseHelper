@@ -1,3 +1,4 @@
+
 import time, requests, re, json, threading
 from time import sleep
 from tkinter import *
@@ -163,7 +164,7 @@ def reset(e1,e2,e3):
       e2.set("")
       e3.set("")
 
-def exit(s1,quitFlag):
+def exit(quitFlag):
       quitFlag[0] = True
       button[0]['state']='normal'
       button[1]['state']='disabled'
@@ -183,9 +184,6 @@ def populate(frame):
       for row in range(7):
             Checkbutton(frame, text=curriculum[110+row][1],variable=v).grid(row=row, column=11, sticky='w')
       Label(frame, text="6-2").grid(row=10, column=11, sticky='s')
-
-def onFrameConfigure(canvas):
-      canvas.configure(scrollregion=canvas.bbox("all"))
 
 def qiangKe(courseSelected, quitFlag, courseName):   
       xuanKeUrl = 'http://bkxk.xmu.edu.cn/xsxk/elect.html'
@@ -253,9 +251,12 @@ def showCurriculum(root):
       getButton = Button(text="  抢 课   ",command=lambda:startThread(courseidList, courseSelected, quitFlag))
       getButton.place(x=100,y=356)
       button.append(getButton)
-      quitButton = Button(text="  退 出   ",command=(lambda:exit('hello',quitFlag)), state='disabled')
+      quitButton = Button(text="  退 出   ",command=(lambda:exit(quitFlag)), state='disabled')
       quitButton.place(x=200,y=356)
       button.append(quitButton)
+
+def onFrameConfigure(canvas):
+      canvas.configure(scrollregion=canvas.bbox("all"))
 
 def builtGUI(userData):
       root.geometry("400x400+500+200")
